@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	<title>ul-router</title>
+	<link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" href="style.css">
+	<script type="text/javascript" src="../node_modules/angular/angular.js"></script>
+	<script type="text/javascript" src="../node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+	<script type="text/javascript" src="../node_modules/jquery/dist/jquery.js"></script>
+	<script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+
+</head>
+<body ng-app="myApp">
+	<div class="container" ng-controller="MyController">
+		<div ui-view></div>
+	</div>             
+
+
+  <script type="text/javascript">
+	  
+	  	var myApp = angular.module("myApp",["ui.router"]);
+	   		myApp.config(function($stateProvider, $urlRouterProvider, $locationProvider){
+	   			$locationProvider.hashPrefix('')//去掉地址栏中的！
+	   			$urlRouterProvider.otherwise("/defalut");//设置默认跳转路由
+	   			$stateProvider.state("index",{//对应ui-sref
+	   				url : "/defalut",
+	   				views : {
+	   					"" : {
+	   						templateUrl : "./src/index.html"
+	   					},
+	   					"topBar@index" : {
+	   						templateUrl : "./src/topBar.html"
+	   					},
+	   					"bottomContent@index" : {
+	   						templateUrl : "./src/bottomContent.html"
+	   					}
+	   				}
+	   			})
+	   			.state("index.Messages",{
+	   				url : "/messages",
+	   				views : {
+	   					"bottomContent@index" : {
+	   						templateUrl : "./src/messages.html",
+							controller : "BookController"
+	   					}
+	   				}
+	   			})
+	   			.state("index.Profile",{
+	   				url : "/profile",
+	   				views : {
+	   					"bottomContent@index" : {
+	   						templateUrl : "./src/srofile.html"
+	   					}
+	   				}
+	   			})
+                    .state("index.Profile.pOne",{
+                        url : "/pone",
+                        templateUrl : "./src/pOne.html"
+                    })
+                    .state("index.Profile.pTwo",{
+                        url : "/ptwo",
+                        templateUrl : "./src/pTwo.html"
+                    })
+	   			.state("index.Settings",{
+	   				url : "/settings",
+	   				views : {
+	   					"bottomContent@index" : {
+	   						templateUrl : "./src/settings.html"
+	   					}
+	   				}
+	   			})
+	   		});
+
+		myApp.controller("MyController",function ($scope) {
+            $scope.firstActClass = true;
+			$scope.addActiveClass = function (arg) {
+				$scope.activeClass = arg;
+                if(arg!=="index"){
+                    $scope.firstActClass = false;
+                }
+
+			}
+		});
+
+		// $(document).ready(function(){
+			// $('#myTabs a').click(function (e) {
+	  // 			e.preventDefault();
+	  // 			$(this).tab('show');
+			// })
+		// })
+
+   		
+  </script>
+	<script src="js/app.js"></script>
+</body>
+</html>

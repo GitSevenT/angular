@@ -1,0 +1,15 @@
+#content{
+	margin-bottom: 20px;
+}
+
+@media screen and (max-width: 640px) { 
+	#meuBar{
+		display: none;
+	}
+}
+.firstAct{
+	background: #e7e7e7;
+}
+button.list-group-item:focus{
+	outline: none;
+}
