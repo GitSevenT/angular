@@ -1,3 +1,2 @@
 ﻿# angular
-angular路由实战
-你好
+angular ui-router
